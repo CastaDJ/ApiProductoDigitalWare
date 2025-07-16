@@ -12,6 +12,7 @@ import com.dw.producto.services.ProductoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -58,7 +59,7 @@ public class Controller {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("update/{id}")
     public ResponseEntity<Producto> updateProduct(@PathVariable Integer id, @RequestBody Producto producto) {
         try {
             Producto updatedProducto = productoService.updateProducto(id, producto);
@@ -67,6 +68,16 @@ public class Controller {
             } else {
                 return ResponseEntity.notFound().build();
             }
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Integer id) {
+        try {
+            productoService.deleteProducto(id);
+            return ResponseEntity.noContent().build();
         } catch (Exception e) {
             return ResponseEntity.status(500).build();
         }
