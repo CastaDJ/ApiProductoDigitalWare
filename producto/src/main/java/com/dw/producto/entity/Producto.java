@@ -1,4 +1,4 @@
-package com.dw.producto.enty;
+package com.dw.producto.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
